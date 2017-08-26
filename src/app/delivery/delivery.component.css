@@ -1,0 +1,14 @@
+div.container {
+  height: 100vh;
+  text-align: center;
+  width: 100%;
+}
+
+div.first-input {
+  padding-top: 2em;
+  margin-bottom: 1em;
+}
+
+div.second-input {
+  margin-bottom: 1.5em;
+}

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="clearfix"></div>
+  <div class="wrapper">
+    <div class="image">
+        <img *ngIf="product?.image != '' "src="product?.image"/>
+        <img *ngIf="product?.image == '' "src="../../../../assets/NoPicAvailable.png"/>
+    </div>
+    <div class="title">
+      <h1>{{product?.name}}</h1>
+    </div>
+    <div class="description">
+      <h3>{{product?.description}}</h3>
+    </div>
+    <div class="quantity">
+      <h3>Quantity</h3>
+      <div class="quantity-adjustment">
+        <button md-raised-button (click)="subtractQuantity()">-</button>
+        <input type="number" [(ngModel)]="quantity" min="1" name="quantity"/>
+        <button md-raised-button (click)="addQuantity()">+</button>
+      </div>
+    </div>
+    <div class="options">
+      <h3>Options</h3>
+      <div class="option-items">
+        <md-select
+          placeholder="{{productOption.name}}"
+          class="items"
+          *ngFor="let productOption of productOptions; let i = index;"
+          (change)="onChange($event.value, i)">
+          <md-option
+            *ngFor="let productOptionValue of productOption.product_option_values"
+            [value]="productOptionValue">
+              <span>{{productOptionValue.value}} - &#8369; {{productOptionValue.price | number : '1.2'}}</span>
+          </md-option>
+        </md-select>
+      </div>
+    </div>
+    <table class="total">
+      <tr class="price">
+        <td>
+          <h2>Price</h2>
+        </td>
+        <td>
+          <h3><span>&#8369;</span> {{product?.price | number : '1.2'}}</h3>
+        </td>
+      </tr>
+      <tr class="additional-price">
+        <td>
+          <h2>Additional Price</h2>
+        </td>
+        <td>
+          <h3><span>&#8369;</span> {{additionalPrice | number : '1.2'}}</h3>
+        </td>
+      </tr>
+      <tr class="total-price">
+        <td>
+          <h2>Total Price</h2>
+        </td>
+        <td>
+          <h3><span>&#8369;</span> {{totalPrice | number : '1.2'}}</h3>
+        </td>
+      </tr>
+    </table>
+    <div class="submit">
+      <button md-raised-button (click)="addToCart()">Add To Cart</button>
+    <div>
+  </div>
+</div>

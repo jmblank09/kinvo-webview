@@ -1,0 +1,25 @@
+.header, .container, .footer {
+  width: 100%;
+  height: auto;
+  clear: both;
+  display: flex;
+  justify-content: space-around;
+  display: block;
+}
+.header {
+  height: 42px;
+  top: 0px;
+  position: fixed;
+  display: block;
+}
+.footer {
+  bottom: 0px;
+  height: 36px;
+  position: fixed;
+  display: block;
+}
+
+.container {
+  display: block;
+  height: 100%;
+}

@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+  height: 100%;
+  margin: 0px;
+  background-color: #fff;
+  padding: 0px;
+}
+
+simple-snack-bar.mat-simple-snackbar, .mat-snack-bar-container {
+  text-align: center;
+  justify-content: center;
+  font-family: Roboto,sans-serif;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.mat-select-underline {
+  display: none;
+}

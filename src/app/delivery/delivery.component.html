@@ -1,0 +1,32 @@
+<div class="container">
+  <form class="example-form" (ngSubmit)="onSubmit()">
+    <!-- Date -->
+    <div class="first-input">
+      <md-input-container class="example-full-width">
+        <input
+          mdInput
+          [mdDatepicker]="picker"
+          placeholder="Choose a date"
+          [(ngModel)]="temp.date"
+          name="date" />
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      </md-input-container>
+      <md-datepicker touchUi="true" #picker></md-datepicker>
+    </div>
+    <!-- Time -->
+    <div class="second-input">
+      <md-input-container class="example-full-width">
+        <input
+          mdInput
+          placeholder="Choose a time"
+          type="time"
+          [(ngModel)]="temp.time"
+          name="time" />
+      </md-input-container>
+    </div>
+    <!-- Submit button -->
+    <div class="submit">
+      <button md-raised-button type="submit">Set your order</button>
+    </div>
+  </form>
+</div>

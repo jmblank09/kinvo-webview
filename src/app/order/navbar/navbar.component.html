@@ -1,0 +1,18 @@
+<div class="navbar-container">
+  <div class="nav-back" (click)="Back()">
+    <i class="fa fa-backward" aria-hidden="true"></i>
+    <span>back</span>
+  </div>
+  <div class="nav-menu">
+    <a [routerLink]="['menu']">
+      <i class="fa fa-cutlery" aria-hidden="true"></i>
+      <span>menu</span>
+    </a>
+  </div>
+  <div class="nav-cart">
+    <a [routerLink]="['cart']">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <span>cart</span>
+    </a>
+  </div>
+</div>

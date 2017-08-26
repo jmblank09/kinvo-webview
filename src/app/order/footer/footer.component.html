@@ -1,0 +1,18 @@
+<div class="submit">
+  <button md-button (click)="showDialog = !showDialog">Checkout</button>
+</div>
+
+<!-- Dialog for delete -->
+<app-dialog [(visible)]="showDialog">
+  <div class="form">
+    <div class="form-header delete">
+      <h1>Are you sure you want to checkout?</h1>
+    </div>
+    <div class="form-body delete-body">
+      <div class="delete-button-wrapper">
+        <button type="button" class="btn-create-chatbot cancel-button" (click)="showDialog = !showDialog;">No</button>
+        <button type="button" class="btn-create-chatbot delete-button" (click)="onSubmit()">Yes</button>
+      </div>
+    </div>
+  </div>
+</app-dialog>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="clearfix"></div>
+  <div class="title">
+    <h1>Products</h1>
+  </div>
+  <div class="wrapper">
+    <a (click)="goToProduct(product.id)" *ngFor="let product of products">
+      <div class="category" >
+        <div class="image">
+          <img *ngIf="product.image != '' "src="product.image"/>
+          <img *ngIf="product.image == '' "src="../../../../assets/NoPicAvailable.png"/>
+        </div>
+        <div class="details">
+          <h3>{{product.name}}</h3>
+          <p><span>&#8369;</span> {{product.price | number : '1.2'}}</p>
+          <h6>{{product.description}}</h6>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
