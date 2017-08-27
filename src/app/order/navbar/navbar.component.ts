@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
+  constructor(private location: Location) { }
 
   Back() {
-    // this.router.navigate(['/back']);
-    console.log('back');
+    this.location.back();
   }
 }
