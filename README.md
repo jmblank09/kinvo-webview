@@ -15,9 +15,11 @@ KinvoWebview for webview of max and krispy kreme chatbots. This application is c
 
 1. Run `npm install` to install server dependencies.
 
-3. Run `ng serve` for a dev server.
+2. Download Access-Control-Allow-Origin:* google chrome extension for cors problems. https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
 
-4. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2. Run `ng serve` for a dev server.
+
+3. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

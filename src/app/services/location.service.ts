@@ -14,13 +14,16 @@ export class LocationService {
 
   getLocation(lat, long) {
     this.url += lat + ',' + long;
+
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
+    
     return this.http.get(this.url, {headers: headers})
     .map((data: Response) => data.json())
     .catch(this.handleError);
   }
+
   private handleError (error: any) {
     return Observable.throw(error.json());
   }

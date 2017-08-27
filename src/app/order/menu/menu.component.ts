@@ -37,25 +37,30 @@ export class MenuComponent implements OnInit {
       this._cookieService.put('buyer_id', this.activatedRoute.snapshot.queryParams["buyer_id"]);
       this.lat = this.activatedRoute.snapshot.queryParams["lat"];
       this.long = this.activatedRoute.snapshot.queryParams["long"];
-
-      console.log(this.lat, this.long);
+      //get categories
       this.menu.getAllCategories(this._cookieService.get('brand_id')).subscribe(
         success => {
           this._cookieService.putObject('categories', success.data.categories);
           this.addData(success.data.categories);
-
+          //set title
           this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
             success => {
               this.title.setTitle(success.data.brand.name);
-              this.loading = false;
+              //get location
+              this.location.getLocation(this.lat, this.long).subscribe(
+                success => {
+                  this._cookieService.put('location', success.results[1].address_components[2].long_name);
+                  this.loading = false;
+                },
+                error => {
+                  console.log(error);
+                  this.loading = false;
+                }
+              );
             },
             error => console.log(error)
           );
-          // //get location
-          // this.location.getLocation(this.lat, this.long).subscribe(
-          //   success => console.log(success),
-          //   error => console.log(error)
-          // );
+
         },
         error => console.log(error)
       );

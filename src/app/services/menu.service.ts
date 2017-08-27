@@ -23,6 +23,7 @@ export class MenuService {
   }
 
   getProducts(id: string) {
+    // with location
     // var graphql = `{
     //                   products(brand_id:`+ this._cookieService.get('brand_id')
     //                   +`, category_id: `+ id +`, location: "`+ this._cookieService.get('location') +`"){
@@ -33,7 +34,9 @@ export class MenuService {
     //                     price
     //                   }
     //                 }`;
+
 // TODO: delete below
+    // without location
     var graphql = `{
                       products(brand_id:`+ this._cookieService.get('brand_id')
                       +`, category_id: `+ id + `){
@@ -93,7 +96,7 @@ export class MenuService {
     console.log(mutation);
     return this.sendRequest(mutation);
   }
-  
+
   sendRequest(graphql) {
     var formatted_data = {
       operationName: null,
