@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CookieService } from 'ngx-cookie';
-import { CartService } from '../../services';
+import { CartService, BrandService } from '../../services';
 
 @Component({
   selector: 'app-checkout',
@@ -21,8 +22,10 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private title: Title,
     private _cookieService: CookieService,
-    private cart: CartService
+    private cart: CartService,
+    private brand: BrandService
   ) { }
 
   ngOnInit() {
@@ -35,7 +38,14 @@ export class CheckoutComponent implements OnInit {
         success => {
           this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
           this.addData(success.data.buyer.cart.cart_items);
-          this.loading = false;
+
+          this.brand.getBrand(this.brandId).subscribe(
+            success => {
+              this.title.setTitle(success.data.brand.name);
+              this.loading = false;
+            },
+            error => console.log(error)
+          );
         },
         error => console.log(error)
       );
@@ -45,7 +55,14 @@ export class CheckoutComponent implements OnInit {
           success => {
             this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
             this.addData(success.data.buyer.cart.cart_items);
-            this.loading = false;
+
+            this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
+              success => {
+                this.title.setTitle(success.data.brand.name);
+                this.loading = false;
+              },
+              error => console.log(error)
+            );
           },
           error => console.log(error)
         );

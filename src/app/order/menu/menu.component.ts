@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
-import { MenuService, LocationService } from '../../services';
+import { MenuService, LocationService, BrandService } from '../../services';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -20,9 +21,11 @@ export class MenuComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private title: Title,
+    private _cookieService: CookieService,
     private menu: MenuService,
     private location: LocationService,
-    private _cookieService: CookieService
+    private brand: BrandService
   ) { }
 
   ngOnInit() {
@@ -41,19 +44,32 @@ export class MenuComponent implements OnInit {
           this._cookieService.putObject('categories', success.data.categories);
           this.addData(success.data.categories);
 
-          //get location
-          this.location.getLocation(this.lat, this.long).subscribe(
-            success => console.log(success),
+          this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
+            success => {
+              this.title.setTitle(success.data.brand.name);
+              this.loading = false;
+            },
             error => console.log(error)
           );
-          this.loading = false;
+          // //get location
+          // this.location.getLocation(this.lat, this.long).subscribe(
+          //   success => console.log(success),
+          //   error => console.log(error)
+          // );
         },
         error => console.log(error)
       );
     } else {
       if(this._cookieService.getObject('categories') !== undefined) {
         this.addData(this._cookieService.getObject('categories'));
-        this.loading = false;
+
+        this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
+          success => {
+            this.title.setTitle(success.data.brand.name);
+            this.loading = false;
+          },
+          error => console.log(error)
+        );
       }
       this.loading = false;
     }

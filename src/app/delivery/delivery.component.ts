@@ -1,18 +1,25 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { DatePipe } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-delivery',
   templateUrl: './delivery.component.html',
   styleUrls: ['./delivery.component.css']
 })
-export class DeliveryComponent {
+export class DeliveryComponent implements OnInit {
   currentDate = new Date();
 
   temp = {
     date: this.currentDate,
     time: this.currentDate.getHours() + ':' + this.currentDate.getMinutes()
+  }
+
+  constructor(private title: Title) {}
+
+  ngOnInit() {
+    this.title.setTitle('Delivery');
   }
 
   onSubmit(){
@@ -25,5 +32,5 @@ export class DeliveryComponent {
 
     console.log(data);
   }
-  
+
 }
