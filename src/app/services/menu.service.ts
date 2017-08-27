@@ -24,22 +24,9 @@ export class MenuService {
 
   getProducts(id: string) {
     // with location
-    // var graphql = `{
-    //                   products(brand_id:`+ this._cookieService.get('brand_id')
-    //                   +`, category_id: `+ id +`, location: "`+ this._cookieService.get('location') +`"){
-    //                     id
-    //                     name
-    //                     description
-    //                     image
-    //                     price
-    //                   }
-    //                 }`;
-
-// TODO: delete below
-    // without location
     var graphql = `{
                       products(brand_id:`+ this._cookieService.get('brand_id')
-                      +`, category_id: `+ id + `){
+                      +`, category_id: `+ id +`, location: "`+ this._cookieService.get('location') +`"){
                         id
                         name
                         description
