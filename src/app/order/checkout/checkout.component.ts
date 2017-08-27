@@ -40,20 +40,15 @@ export class CheckoutComponent implements OnInit {
         error => console.log(error)
       );
     } else {
-      if(this._cookieService.getObject('cart_items') !== undefined) {
-        this.addData(this._cookieService.getObject('cart_items'));
-        this.loading = false;
-      } else {
-        if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
-          this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
-            success => {
-              this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-              this.addData(success.data.buyer.cart.cart_items);
-              this.loading = false;
-            },
-            error => console.log(error)
-          );
-        }
+      if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
+        this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
+          success => {
+            this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
+            this.addData(success.data.buyer.cart.cart_items);
+            this.loading = false;
+          },
+          error => console.log(error)
+        );
       }
     }
   }
