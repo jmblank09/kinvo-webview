@@ -1577,7 +1577,7 @@ var AppSettings = (function () {
     return AppSettings;
 }());
 
-AppSettings.API_URL = 'http://localhost:3000/graphql';
+AppSettings.API_URL = 'https://2623d53e.ngrok.io/graphql';
 AppSettings.MAP_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
 //# sourceMappingURL=constants.js.map
 
