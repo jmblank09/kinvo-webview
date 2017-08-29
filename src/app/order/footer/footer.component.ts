@@ -8,7 +8,7 @@ import { WindowCloseService, UserService } from '../../services';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  private showDialog:boolean = false;
+  showDialog:boolean = false;
 
   constructor(
     private close: WindowCloseService,

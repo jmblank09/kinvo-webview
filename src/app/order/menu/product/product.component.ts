@@ -13,14 +13,17 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ProductComponent implements OnInit {
   private productId: string;
-  private image: string = '';
-  private noImage: string = '';
-  private quantity: number = 1;
-  private additionalPrice: number = 0;
-  private totalPrice: number;
-  private product: object;
+  imageProduct: string = '';
+  quantityProduct: number = 1;
+  additionalPriceProduct: number = 0;
+  totalPriceProduct: number;
   private selectedProductOption: object;
-  private productOptions: object[] = [];
+  selectedProduct: object = {
+    name: '',
+    description: '',
+    price: 0
+  };
+  productOptions: object[] = [];
   private productOptionValues: object[] =[];
   private subscription: Subscription;
 
@@ -49,9 +52,9 @@ export class ProductComponent implements OnInit {
   }
 
   setData(data) {
-    this.product = data;
+    this.selectedProduct = data;
     this.setProductOptions(data.product_options);
-    this.image = this.product['image'];
+    this.imageProduct = this.selectedProduct['image'];
   }
 
   setProductOptions(options) {
@@ -61,26 +64,26 @@ export class ProductComponent implements OnInit {
   }
 
   addQuantity() {
-    this.quantity++;
+    this.quantityProduct++;
     this.computeTotal();
   }
 
   subtractQuantity() {
-    if(this.quantity > 1) {
-      this.quantity--;
+    if(this.quantityProduct > 1) {
+      this.quantityProduct--;
       this.computeTotal();
     }
   }
 
   computeTotal() {
-    this.totalPrice = this.additionalPrice + (this.quantity * this.product['price']);
+    this.totalPriceProduct = this.additionalPriceProduct + (this.quantityProduct * this.selectedProduct['price']);
   }
 
   computeAdditional() {
-    this.additionalPrice = 0;
+    this.additionalPriceProduct = 0;
     for(var i = 0; i < this.productOptionValues.length; i++) {
       if(this.productOptionValues[i] !== undefined) {
-        this.additionalPrice += this.productOptionValues[i]['price'];
+        this.additionalPriceProduct += this.productOptionValues[i]['price'];
       }
     }
   }
@@ -94,8 +97,8 @@ export class ProductComponent implements OnInit {
   addToCart() {
     let data = {
       cart_id: this._cookieService.get('buyer_id'),
-      product_id: this.product['id'],
-      quantity: this.quantity,
+      product_id: this.selectedProduct['id'],
+      quantity: this.quantityProduct,
       selected_options: this.productOptionValues
     };
 

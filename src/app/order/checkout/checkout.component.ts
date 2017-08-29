@@ -11,7 +11,7 @@ import { CartService, BrandService } from '../../services';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  private loading: boolean = false;
+  loading: boolean = false;
   private noFood: boolean = false;
   private totalPrice: number = 0;
   private brandId: string;

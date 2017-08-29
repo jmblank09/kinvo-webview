@@ -2,19 +2,19 @@
   <div class="clearfix"></div>
   <div class="wrapper">
     <div class="image">
-        <img [src]="image != '' ? image : noImage"/>
+        <img [src]="imageProduct != '' ? imageProduct : 'assets/NoPicAvailable.png'"/>
     </div>
     <div class="title">
-      <h1>{{product?.name}}</h1>
+      <h1>{{selectedProduct?.name}}</h1>
     </div>
     <div class="description">
-      <h3>{{product?.description}}</h3>
+      <h3>{{selectedProduct?.description}}</h3>
     </div>
     <div class="quantity">
       <h3>Quantity</h3>
       <div class="quantity-adjustment">
         <button md-raised-button (click)="subtractQuantity()">-</button>
-        <input type="number" [(ngModel)]="quantity" min="1" name="quantity"/>
+        <input type="number" [(ngModel)]="quantityProduct" min="1" name="quantityProduct"/>
         <button md-raised-button (click)="addQuantity()">+</button>
       </div>
     </div>
@@ -40,7 +40,7 @@
           <h2>Price</h2>
         </td>
         <td>
-          <h3><span>&#8369;</span> {{product?.price | number : '1.2'}}</h3>
+          <h3><span>&#8369;</span> {{selectedProduct?.price | number : '1.2'}}</h3>
         </td>
       </tr>
       <tr class="additional-price">
@@ -48,7 +48,7 @@
           <h2>Additional Price</h2>
         </td>
         <td>
-          <h3><span>&#8369;</span> {{additionalPrice | number : '1.2'}}</h3>
+          <h3><span>&#8369;</span> {{additionalPriceProduct | number : '1.2'}}</h3>
         </td>
       </tr>
       <tr class="total-price">
@@ -56,7 +56,7 @@
           <h2>Total Price</h2>
         </td>
         <td>
-          <h3><span>&#8369;</span> {{totalPrice | number : '1.2'}}</h3>
+          <h3><span>&#8369;</span> {{totalPriceProduct | number : '1.2'}}</h3>
         </td>
       </tr>
     </table>

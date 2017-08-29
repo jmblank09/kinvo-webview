@@ -11,7 +11,6 @@ import { MenuService } from '../../../services';
 })
 export class ProductListComponent implements OnInit {
   private categoryId: string;
-  private noImage: string = 'assets/NoPicAvailable.png';
   private products:object[] = [];
   private subscription: Subscription;
 

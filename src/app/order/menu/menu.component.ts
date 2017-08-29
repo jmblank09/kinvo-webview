@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   private lat: string;
   private long: string;
   private brandId: string;
-  private loading: boolean = false;
+  loading: boolean = false;
   private categories:object[] = [];
 
   constructor(
