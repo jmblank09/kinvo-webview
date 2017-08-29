@@ -13,6 +13,8 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ProductComponent implements OnInit {
   private productId: string;
+  private image: string = '';
+  private noImage: string = '';
   private quantity: number = 1;
   private additionalPrice: number = 0;
   private totalPrice: number;
@@ -49,6 +51,7 @@ export class ProductComponent implements OnInit {
   setData(data) {
     this.product = data;
     this.setProductOptions(data.product_options);
+    this.image = this.product['image'];
   }
 
   setProductOptions(options) {
@@ -95,7 +98,7 @@ export class ProductComponent implements OnInit {
       quantity: this.quantity,
       selected_options: this.productOptionValues
     };
-    
+
     console.log(data);
     this.menu.addToCart(data).subscribe(
       success => {

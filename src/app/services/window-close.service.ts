@@ -38,7 +38,6 @@ export class WindowCloseService {
     };
 
     const body = JSON.stringify(formatted_data);
-    console.log(body);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.url, body, {headers: headers})

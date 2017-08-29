@@ -7,11 +7,7 @@
     <a (click)="goToProduct(product.id)" *ngFor="let product of products">
       <div class="category" >
         <div class="image">
-          <img *ngIf="product.image != '' " src="product.image"/>
-          <!-- development -->
-          <!-- <img *ngIf="product.image == '' " src="../../../../assets/NoPicAvailable.png"/> -->
-          <!-- deployment -->
-          <img *ngIf="product.image == '' " src="assets/NoPicAvailable.png"/>
+            <img [src]="product?.image != '' ? product?.image : noImage"/>
         </div>
         <div class="details">
           <h3>{{product.name}}</h3>

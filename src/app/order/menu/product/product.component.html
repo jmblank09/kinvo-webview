@@ -2,11 +2,7 @@
   <div class="clearfix"></div>
   <div class="wrapper">
     <div class="image">
-        <img *ngIf="product?.image != '' "src="product?.image"/>
-        <!-- development -->
-        <!-- <img *ngIf="product.image == '' " src="../../../../assets/NoPicAvailable.png"/> -->
-        <!-- deployment -->
-        <img *ngIf="product.image == '' " src="assets/NoPicAvailable.png"/>
+        <img [src]="image != '' ? image : noImage"/>
     </div>
     <div class="title">
       <h1>{{product?.name}}</h1>
