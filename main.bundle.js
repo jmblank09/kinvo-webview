@@ -430,7 +430,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/order/checkout/checkout.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"!loading\">\n  <div class=\"clearfix\"></div>\n  <div class=\"title\">\n    <h1>Order Summary</h1>\n  </div>\n  <div class=\"wrapper\">\n    <div *ngIf=\"!noFood\">\n      <div class=\"product\" *ngFor=\"let cartItem of cartItems; let i = index\">\n        <div class=\"image\">\n          <img *ngIf=\"cartItem.product.image != '' \"src=\"product.image\"/>\n          <!-- development -->\n          <!-- <img *ngIf=\"product.image == '' \" src=\"../../../../assets/NoPicAvailable.png\"/> -->\n          <!-- deployment -->\n          <img *ngIf=\"product.image == '' \" src=\"assets/NoPicAvailable.png\"/>\n        </div>\n        <div class=\"description\">\n          <div class=\"product-name\">\n            <h3>{{cartItem.product.name}}</h3>\n          </div>\n          <div class=\"product-price\">\n            <div class=\"product-quantity\">\n              <h5><span>&#8369; </span>{{cartItem.product.price | number : '1.2'}} <span> x </span>{{cartItem.quantity}}</h5>\n            </div>\n            <div class=\"product-total\">\n              <h4><span>&#8369; </span>{{itemTotalPrice[i] | number : '1.2'}}</h4>\n            </div>\n          </div>\n          <div class=\"delete\">\n            <h5 (click)=\"deleteItem()\">Remove</h5>\n          </div>\n        </div>\n      </div>\n      <div class=\"clear\">\n        <button md-raised-button (click)=\"removeAll()\">Remove all</button>\n      </div>\n      <div class=\"total-container\">\n        <div class=\"total-bill\">\n          <div class=\"total-title\">\n            <h3>Total Price</h3>\n          </div>\n          <div class=\"total-price\">\n            <h3><span>&#8369; </span>{{totalPrice | number : '1.2'}}</h3>\n          </div>\n        </div>\n      </div>\n    </div>\n    <!-- empty food tray -->\n    <div class =\"empty\" *ngIf=\"noFood\">\n      <div class=\"detail\">\n        <h3>You do not have a food in your tray.</h3>\n        <h2>Go Order Now!</h2>\n      </div>\n      <div class=\"add-food\">\n        <button md-raised-button (click)=\"goToMenu()\">Add a Food</button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- loading -->\n<div class=\"spinner\" *ngIf=\"loading\">\n  <svg viewBox=\"-10 -10 220 220\">\n    <path d=\"M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z\"></path>\n  </svg>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"!loading\">\n  <div class=\"clearfix\"></div>\n  <div class=\"title\">\n    <h1>Order Summary</h1>\n  </div>\n  <div class=\"wrapper\">\n    <div *ngIf=\"!noFood\">\n      <div class=\"product\" *ngFor=\"let cartItem of cartItems; let i = index\">\n        <div class=\"image\">\n          <img [src]=\"cartItem.product.image != '' ? cartItem.product.image : 'assets/NoPicAvailable.png'\"/>\n        </div>\n        <div class=\"description\">\n          <div class=\"product-name\">\n            <h3>{{cartItem.product.name}}</h3>\n          </div>\n          <div class=\"product-price\">\n            <div class=\"product-quantity\">\n              <h5><span>&#8369; </span>{{cartItem.product.price | number : '1.2'}} <span> x </span>{{cartItem.quantity}}</h5>\n            </div>\n            <div class=\"product-total\">\n              <h4><span>&#8369; </span>{{itemTotalPrice[i] | number : '1.2'}}</h4>\n            </div>\n          </div>\n          <div class=\"delete\">\n            <h5 (click)=\"deleteItem()\">Remove</h5>\n          </div>\n        </div>\n      </div>\n      <div class=\"clear\">\n        <button md-raised-button (click)=\"removeAll()\">Remove all</button>\n      </div>\n      <div class=\"total-container\">\n        <div class=\"total-bill\">\n          <div class=\"total-title\">\n            <h3>Total Price</h3>\n          </div>\n          <div class=\"total-price\">\n            <h3><span>&#8369; </span>{{totalPrice | number : '1.2'}}</h3>\n          </div>\n        </div>\n      </div>\n    </div>\n    <!-- empty food tray -->\n    <div class =\"empty\" *ngIf=\"noFood\">\n      <div class=\"detail\">\n        <h3>You do not have a food in your tray.</h3>\n        <h2>Go Order Now!</h2>\n      </div>\n      <div class=\"add-food\">\n        <button md-raised-button (click)=\"goToMenu()\">Add a Food</button>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- loading -->\n<div class=\"spinner\" *ngIf=\"loading\">\n  <svg viewBox=\"-10 -10 220 220\">\n    <path d=\"M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z\"></path>\n  </svg>\n</div>\n"
 
 /***/ }),
 
@@ -576,8 +576,7 @@ module.exports = "<div class=\"submit\">\n  <button md-button (click)=\"showDial
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__("../../../../../src/app/services/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__("../../../../../src/app/services/index.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FooterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -590,26 +589,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var FooterComponent = (function () {
-    function FooterComponent(router, close, user) {
-        this.router = router;
+    function FooterComponent(close, user) {
         this.close = close;
         this.user = user;
         this.showDialog = false;
     }
     FooterComponent.prototype.onSubmit = function () {
         var _this = this;
-        // this.router.navigate(['/review']);
-        console.log('close window');
         this.user.getUserDetails().subscribe(function (success) {
             _this.close.sendToBot(success.data.buyer.fb_uid).subscribe(function (success) {
                 console.log('success');
             }, function (error) {
                 console.log('error');
-                window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Test';
             });
         }, function (error) { return console.log(error); });
+        window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Test';
     };
     return FooterComponent;
 }());
@@ -619,10 +614,10 @@ FooterComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/order/footer/footer.component.html"),
         styles: [__webpack_require__("../../../../../src/app/order/footer/footer.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["a" /* WindowCloseService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services__["a" /* WindowCloseService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* UserService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["a" /* WindowCloseService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services__["a" /* WindowCloseService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* UserService */]) === "function" && _b || Object])
 ], FooterComponent);
 
-var _a, _b, _c;
+var _a, _b;
 //# sourceMappingURL=footer.component.js.map
 
 /***/ }),
@@ -842,7 +837,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/order/menu/product-list/product-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"clearfix\"></div>\n  <div class=\"title\">\n    <h1>Products</h1>\n  </div>\n  <div class=\"wrapper\">\n    <a (click)=\"goToProduct(product.id)\" *ngFor=\"let product of products\">\n      <div class=\"category\" >\n        <div class=\"image\">\n          <img *ngIf=\"product.image != '' \" src=\"product.image\"/>\n          <!-- development -->\n          <!-- <img *ngIf=\"product.image == '' \" src=\"../../../../assets/NoPicAvailable.png\"/> -->\n          <!-- deployment -->\n          <img *ngIf=\"product.image == '' \" src=\"assets/NoPicAvailable.png\"/>\n        </div>\n        <div class=\"details\">\n          <h3>{{product.name}}</h3>\n          <p><span>&#8369;</span> {{product.price | number : '1.2'}}</p>\n          <h6>{{product.description}}</h6>\n        </div>\n      </div>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"clearfix\"></div>\n  <div class=\"title\">\n    <h1>Products</h1>\n  </div>\n  <div class=\"wrapper\">\n    <a (click)=\"goToProduct(product.id)\" *ngFor=\"let product of products\">\n      <div class=\"category\" >\n        <div class=\"image\">\n            <img [src]=\"product?.image != '' ? product?.image : noImage\"/>\n        </div>\n        <div class=\"details\">\n          <h3>{{product.name}}</h3>\n          <p><span>&#8369;</span> {{product.price | number : '1.2'}}</p>\n          <h6>{{product.description}}</h6>\n        </div>\n      </div>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -871,6 +866,7 @@ var ProductListComponent = (function () {
         this.router = router;
         this.activatedRoute = activatedRoute;
         this.menu = menu;
+        this.noImage = 'assets/NoPicAvailable.png';
         this.products = [];
     }
     ProductListComponent.prototype.ngOnInit = function () {
@@ -938,7 +934,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/order/menu/product/product.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"clearfix\"></div>\n  <div class=\"wrapper\">\n    <div class=\"image\">\n        <img *ngIf=\"product?.image != '' \"src=\"product?.image\"/>\n        <!-- development -->\n        <!-- <img *ngIf=\"product.image == '' \" src=\"../../../../assets/NoPicAvailable.png\"/> -->\n        <!-- deployment -->\n        <img *ngIf=\"product.image == '' \" src=\"assets/NoPicAvailable.png\"/>\n    </div>\n    <div class=\"title\">\n      <h1>{{product?.name}}</h1>\n    </div>\n    <div class=\"description\">\n      <h3>{{product?.description}}</h3>\n    </div>\n    <div class=\"quantity\">\n      <h3>Quantity</h3>\n      <div class=\"quantity-adjustment\">\n        <button md-raised-button (click)=\"subtractQuantity()\">-</button>\n        <input type=\"number\" [(ngModel)]=\"quantity\" min=\"1\" name=\"quantity\"/>\n        <button md-raised-button (click)=\"addQuantity()\">+</button>\n      </div>\n    </div>\n    <div class=\"options\">\n      <h3>Options</h3>\n      <div class=\"option-items\">\n        <md-select\n          placeholder=\"{{productOption.name}}\"\n          class=\"items\"\n          *ngFor=\"let productOption of productOptions; let i = index;\"\n          (change)=\"onChange($event.value, i)\">\n          <md-option\n            *ngFor=\"let productOptionValue of productOption.product_option_values\"\n            [value]=\"productOptionValue\">\n              <span>{{productOptionValue.value}} - &#8369; {{productOptionValue.price | number : '1.2'}}</span>\n          </md-option>\n        </md-select>\n      </div>\n    </div>\n    <table class=\"total\">\n      <tr class=\"price\">\n        <td>\n          <h2>Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{product?.price | number : '1.2'}}</h3>\n        </td>\n      </tr>\n      <tr class=\"additional-price\">\n        <td>\n          <h2>Additional Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{additionalPrice | number : '1.2'}}</h3>\n        </td>\n      </tr>\n      <tr class=\"total-price\">\n        <td>\n          <h2>Total Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{totalPrice | number : '1.2'}}</h3>\n        </td>\n      </tr>\n    </table>\n    <div class=\"submit\">\n      <button md-raised-button (click)=\"addToCart()\">Add To Cart</button>\n    <div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"clearfix\"></div>\n  <div class=\"wrapper\">\n    <div class=\"image\">\n        <img [src]=\"image != '' ? image : noImage\"/>\n    </div>\n    <div class=\"title\">\n      <h1>{{product?.name}}</h1>\n    </div>\n    <div class=\"description\">\n      <h3>{{product?.description}}</h3>\n    </div>\n    <div class=\"quantity\">\n      <h3>Quantity</h3>\n      <div class=\"quantity-adjustment\">\n        <button md-raised-button (click)=\"subtractQuantity()\">-</button>\n        <input type=\"number\" [(ngModel)]=\"quantity\" min=\"1\" name=\"quantity\"/>\n        <button md-raised-button (click)=\"addQuantity()\">+</button>\n      </div>\n    </div>\n    <div class=\"options\">\n      <h3>Options</h3>\n      <div class=\"option-items\">\n        <md-select\n          placeholder=\"{{productOption.name}}\"\n          class=\"items\"\n          *ngFor=\"let productOption of productOptions; let i = index;\"\n          (change)=\"onChange($event.value, i)\">\n          <md-option\n            *ngFor=\"let productOptionValue of productOption.product_option_values\"\n            [value]=\"productOptionValue\">\n              <span>{{productOptionValue.value}} - &#8369; {{productOptionValue.price | number : '1.2'}}</span>\n          </md-option>\n        </md-select>\n      </div>\n    </div>\n    <table class=\"total\">\n      <tr class=\"price\">\n        <td>\n          <h2>Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{product?.price | number : '1.2'}}</h3>\n        </td>\n      </tr>\n      <tr class=\"additional-price\">\n        <td>\n          <h2>Additional Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{additionalPrice | number : '1.2'}}</h3>\n        </td>\n      </tr>\n      <tr class=\"total-price\">\n        <td>\n          <h2>Total Price</h2>\n        </td>\n        <td>\n          <h3><span>&#8369;</span> {{totalPrice | number : '1.2'}}</h3>\n        </td>\n      </tr>\n    </table>\n    <div class=\"submit\">\n      <button md-raised-button (click)=\"addToCart()\">Add To Cart</button>\n    <div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -973,6 +969,8 @@ var ProductComponent = (function () {
         this.menu = menu;
         this._cookieService = _cookieService;
         this.snackBar = snackBar;
+        this.image = '';
+        this.noImage = '';
         this.quantity = 1;
         this.additionalPrice = 0;
         this.productOptions = [];
@@ -991,6 +989,7 @@ var ProductComponent = (function () {
     ProductComponent.prototype.setData = function (data) {
         this.product = data;
         this.setProductOptions(data.product_options);
+        this.image = this.product['image'];
     };
     ProductComponent.prototype.setProductOptions = function (options) {
         for (var i = 0; i < options.length; i++) {
@@ -1701,7 +1700,6 @@ var WindowCloseService = (function () {
             ]
         };
         var body = JSON.stringify(formatted_data);
-        console.log(body);
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.url, body, { headers: headers })
