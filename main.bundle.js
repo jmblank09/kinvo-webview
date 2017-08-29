@@ -1459,10 +1459,6 @@ var LocationService = (function () {
     }
     LocationService.prototype.getLocation = function (lat, long) {
         this.url += lat + ',' + long;
-        // const headers = new Headers();
-        // headers.append('Content-Type', 'application/json');
-        // headers.append('Access-Control-Allow-Origin', '*');
-        console.log(this.url);
         return this.http.get(this.url)
             .map(function (data) { return data.json(); })
             .catch(this.handleError);
