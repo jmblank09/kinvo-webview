@@ -158,6 +158,12 @@
   color: #525660;
 }
 
+@media only screen and (max-height: 570px) {
+  .wrapper {
+      height: 76.1%;
+  }
+}
+
 /* loading */
 @-webkit-keyframes s_rotate1 {
   0% {
