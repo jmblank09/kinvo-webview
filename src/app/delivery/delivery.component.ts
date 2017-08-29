@@ -50,7 +50,7 @@ export class DeliveryComponent implements OnInit {
 
     this.user.getUserDetails(this._cookieService.get('buyer_id')).subscribe(
       success => {
-        this.close.sendToBot(success.data.buyer.fb_uid).subscribe(
+        this.close.sendToBot(success.data.buyer.fb_uid, 'CHECKOUT').subscribe(
           success => {
             console.log('success');
           },

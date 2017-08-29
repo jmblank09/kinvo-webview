@@ -45,10 +45,11 @@ export class CheckoutComponent implements OnInit {
           this.title.setTitle(success.data.brand.name);
           this.cart.getCart(this.buyerId, this.brandId).subscribe(
             success => {
-              this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-              if(Object.keys(this._cookieService.getObject('cart_items')).length !== 0) {
-                this.noFood = false;
+              if(success.data.buyer.cart.cart_items > 0) {
                 this.addData(success.data.buyer.cart.cart_items);
+                this.noFood = false;
+              } else {
+                this.noFood = true;
               }
             },
             error => console.log(error)
@@ -59,34 +60,22 @@ export class CheckoutComponent implements OnInit {
 
       this.loadingCart = false;
     } else {
-      if((this._cookieService.getObject('cart_items') !== undefined) && (Object.keys(this._cookieService.getObject('cart_items')).length !== 0)) {
+      if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
         this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
           success => {
             this.title.setTitle(success.data.brand.name);
-            this.addData(this._cookieService.getObject('cart_items'));
-            this.noFood = false;
+            this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
+              success => {
+                if(success.data.buyer.cart.cart_items.length > 0) {
+                  this.addData(success.data.buyer.cart.cart_items);
+                  this.noFood = false;
+                }
+              },
+              error => console.log(error)
+            );
           },
           error => console.log(error)
         );
-      } else {
-        if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
-          this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
-            success => {
-              this.title.setTitle(success.data.brand.name);
-              this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
-                success => {
-                  this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-                  if(Object.keys(this._cookieService.getObject('cart_items')).length !== 0) {
-                    this.addData(success.data.buyer.cart.cart_items);
-                    this.noFood = false;
-                  }
-                },
-                error => console.log(error)
-              );
-            },
-            error => console.log(error)
-          );
-        }
       }
 
       this.loadingCart = false;
@@ -121,10 +110,7 @@ export class CheckoutComponent implements OnInit {
   removeAll() {
     this.cart.removeAllItemsCart(this._cookieService.get('buyer_id')).subscribe(
       success => {
-        this._cookieService.remove('cart_items');
-        this.cartItems = [];
-        this.itemTotalPrice = [];
-        this.totalPrice = 0;
+        this.resetData();
         this.noFood = true;
         this.showDialogDelete = !this.showDialogDelete;
       },
@@ -135,10 +121,7 @@ export class CheckoutComponent implements OnInit {
   deleteItem(cart_item_id) {
     this.cart.removeItemCart(cart_item_id, this._cookieService.get('buyer_id')).subscribe(
       success => {
-        this._cookieService.remove('cart_items');
-        this.cartItems = [];
-        this.itemTotalPrice = [];
-        this.totalPrice = 0;
+        this.resetData();
         this.showDialogDeleteItem = !this.showDialogDeleteItem;
         this.loadingCart = true;
         this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
@@ -157,6 +140,13 @@ export class CheckoutComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  resetData() {
+    this._cookieService.remove('cart_items');
+    this.cartItems = [];
+    this.itemTotalPrice = [];
+    this.totalPrice = 0;
   }
 
   goToMenu() {

@@ -28,7 +28,7 @@ export class FooterComponent {
 
     this.user.getUserDetails(this._cookieService.get('buyer_id')).subscribe(
       success => {
-        this.close.sendToBot(success.data.buyer.fb_uid).subscribe(
+        this.close.sendToBot(success.data.buyer.fb_uid, 'SHOW_DELIVERY').subscribe(
           success => {
             console.log('success');
           },

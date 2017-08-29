@@ -11,7 +11,7 @@ export class WindowCloseService {
 
   constructor(private http: Http) {}
 
-  sendToBot(id){
+  sendToBot(id, type){
     var formatted_data = {
         "object": "page",
         "entry": [
@@ -28,7 +28,7 @@ export class WindowCloseService {
                             "id": id
                         },
                         "postback": {
-                            "payload": "SHOW_DELIVERY",
+                            "payload": type,
                             "title": "Order"
                         }
                     }
