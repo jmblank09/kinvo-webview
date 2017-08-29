@@ -19,6 +19,7 @@ export class CartService {
                         id
                         cart_items {
                           quantity
+                          selected_options
                           product {
                             name
                             image

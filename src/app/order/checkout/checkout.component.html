@@ -21,6 +21,15 @@
               <h4><span>&#8369; </span>{{itemTotalPrice[i] | number : '1.2'}}</h4>
             </div>
           </div>
+          <div class="options" *ngIf="cartItem.selected_options != null">
+            <h5>Options:</h5>
+            <ul>
+              <li *ngFor="let selectedProductOptions of cartItem.selected_options">
+                <span class="option-title">{{selectedProductOptions.option_name}}:</span> {{selectedProductOptions.value}}
+                <span class="option-price" *ngIf="selectedProductOptions.price != ''"> - &#8369; {{selectedProductOptions.price | number : '1.2'}}</span>
+              </li>
+            </ul>
+          </div>
           <div class="delete">
             <h5 (click)="deleteItem()">Remove</h5>
           </div>

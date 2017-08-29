@@ -158,6 +158,34 @@
   color: #525660;
 }
 
+.options h5 {
+  margin: 5px 0px 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #9fa3ad;
+}
+
+.options ul {
+  margin: 1px 0px 0px;
+  list-style-type: circle;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.options > ul > li > span.option-title {
+  font-weight: 500;
+  color: #9fa3ad;
+}
+
+.options > ul > li {
+  color: #464b53;
+}
+
+.options > ul > li > span.option-price {
+  color: #6c7280;
+  font-weight: 900;
+}
+
 @media only screen and (max-height: 570px) {
   .wrapper {
       height: 76.1%;

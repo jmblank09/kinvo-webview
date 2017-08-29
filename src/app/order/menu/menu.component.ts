@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   private lat: string;
   private long: string;
   private brandId: string;
-  loadingMenu: boolean = false;
+  loading: boolean = false;
   private categories:object[] = [];
 
   constructor(
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingMenu = true;
+    this.loading = true;
     this.brandId = this.activatedRoute.snapshot.queryParams["brand_id"];
 
     if(this.brandId !== undefined) {
@@ -51,11 +51,9 @@ export class MenuComponent implements OnInit {
                 success => {
                   this._cookieService.putObject('categories', success.data.categories);
                   this.addData(success.data.categories);
-                  this.loadingMenu = false;
                 },
                 error => {
                   console.log(error);
-                  this.loadingMenu = false;
                 }
               );
             },
@@ -65,7 +63,7 @@ export class MenuComponent implements OnInit {
         error => console.log(error)
       );
 
-      this.loadingMenu = false;
+      this.loading = false;
     } else {
       if(this._cookieService.getObject('categories') !== undefined) {
         this.addData(this._cookieService.getObject('categories'));
@@ -73,12 +71,11 @@ export class MenuComponent implements OnInit {
         this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
           success => {
             this.title.setTitle(success.data.brand.name);
-            this.loadingMenu = false;
           },
           error => console.log(error)
         );
       }
-      this.loadingMenu = false;
+      this.loading = false;
     }
   }
 
