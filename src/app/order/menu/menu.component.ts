@@ -64,6 +64,8 @@ export class MenuComponent implements OnInit {
         },
         error => console.log(error)
       );
+
+      this.loading = false;
     } else {
       if(this._cookieService.getObject('categories') !== undefined) {
         this.addData(this._cookieService.getObject('categories'));

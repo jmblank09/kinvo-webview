@@ -12,13 +12,13 @@ export class LocationService {
 
   constructor(private http: Http, private _cookieService: CookieService) {}
 
-  getLocation(lat, long) {
+  getLocation(lat: string, long: string) {
     this.url += lat + ',' + long;
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
-    
+
     return this.http.get(this.url, {headers: headers})
     .map((data: Response) => data.json())
     .catch(this.handleError);

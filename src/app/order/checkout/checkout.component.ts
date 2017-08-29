@@ -49,6 +49,7 @@ export class CheckoutComponent implements OnInit {
         },
         error => console.log(error)
       );
+      this.loading = false;
     } else {
       if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
         this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
@@ -67,6 +68,7 @@ export class CheckoutComponent implements OnInit {
           error => console.log(error)
         );
       }
+      this.loading = false;
     }
   }
 
