@@ -17,6 +17,7 @@ export class CartService {
                       cart {
                         id
                         cart_items {
+                          id
                           quantity
                           selected_options
                           product {
@@ -57,6 +58,15 @@ export class CartService {
   removeAllItemsCart(id) {
     var mutation = ` mutation {
                       removeAllItemsFromCart(cart_id: `+id+`) {
+                        id
+                      }
+                    }`;
+    return this.sendRequest(mutation);
+  }
+
+  removeItemCart(cart_item_id, cart_id) {
+    var mutation = ` mutation {
+                      removeItemFromCart(cart_item_id: `+ cart_item_id +`, cart_id: `+ cart_id +`) {
                         id
                       }
                     }`;

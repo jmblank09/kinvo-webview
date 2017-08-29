@@ -13,7 +13,9 @@ import { CartService, BrandService } from '../../services';
 export class CheckoutComponent implements OnInit {
   loadingCart: boolean = false;
   showDialogDelete: boolean = false;
-  private noFood: boolean = false;
+  showDialogDeleteItem: boolean = false;
+  private noFood: boolean = true;
+  private idToDelete: number;
   private totalPrice: number = 0;
   private brandId: string;
   private buyerId: string;
@@ -44,21 +46,25 @@ export class CheckoutComponent implements OnInit {
           this.cart.getCart(this.buyerId, this.brandId).subscribe(
             success => {
               this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-              this.addData(success.data.buyer.cart.cart_items);
+              if(Object.keys(this._cookieService.getObject('cart_items')).length !== 0) {
+                this.noFood = false;
+                this.addData(success.data.buyer.cart.cart_items);
+              }
             },
             error => console.log(error)
           );
         },
         error => console.log(error)
       );
-      this.loadingCart = false;
 
+      this.loadingCart = false;
     } else {
-      if(this._cookieService.getObject('cart_items') !== undefined) {
+      if((this._cookieService.getObject('cart_items') !== undefined) && (Object.keys(this._cookieService.getObject('cart_items')).length !== 0)) {
         this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
           success => {
             this.title.setTitle(success.data.brand.name);
             this.addData(this._cookieService.getObject('cart_items'));
+            this.noFood = false;
           },
           error => console.log(error)
         );
@@ -70,15 +76,16 @@ export class CheckoutComponent implements OnInit {
               this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
                 success => {
                   this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-                  this.addData(success.data.buyer.cart.cart_items);
+                  if(Object.keys(this._cookieService.getObject('cart_items')).length !== 0) {
+                    this.addData(success.data.buyer.cart.cart_items);
+                    this.noFood = false;
+                  }
                 },
                 error => console.log(error)
               );
             },
             error => console.log(error)
           );
-        } else {
-          this.noFood = true;
         }
       }
 
@@ -108,7 +115,7 @@ export class CheckoutComponent implements OnInit {
     if(state == 'all')
       this.removeAll();
     else
-      console.log('test');
+      this.deleteItem(state)
   }
 
   removeAll() {
@@ -116,6 +123,8 @@ export class CheckoutComponent implements OnInit {
       success => {
         this._cookieService.remove('cart_items');
         this.cartItems = [];
+        this.itemTotalPrice = [];
+        this.totalPrice = 0;
         this.noFood = true;
         this.showDialogDelete = !this.showDialogDelete;
       },
@@ -123,8 +132,31 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  deleteItem() {
-    console.log('delete item');
+  deleteItem(cart_item_id) {
+    this.cart.removeItemCart(cart_item_id, this._cookieService.get('buyer_id')).subscribe(
+      success => {
+        this._cookieService.remove('cart_items');
+        this.cartItems = [];
+        this.itemTotalPrice = [];
+        this.totalPrice = 0;
+        this.showDialogDeleteItem = !this.showDialogDeleteItem;
+        this.loadingCart = true;
+        this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
+          success => {
+            this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
+            if(Object.keys(this._cookieService.getObject('cart_items')).length !== 0) {
+              this.addData(success.data.buyer.cart.cart_items);
+              this.noFood = false;
+            } else {
+              this.noFood = true;
+            }
+            this.loadingCart = false;
+          },
+          error => console.log(error)
+        );
+      },
+      error => console.log(error)
+    );
   }
 
   goToMenu() {

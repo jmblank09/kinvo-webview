@@ -31,7 +31,7 @@
             </ul>
           </div>
           <div class="delete">
-            <h5 (click)="deleteItem()">Remove</h5>
+            <h5 (click)="idToDelete = cartItem.id; showDialogDeleteItem = !showDialogDeleteItem;">Remove</h5>
           </div>
         </div>
       </div>
@@ -67,11 +67,25 @@
     <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"></path>
   </svg>
 </div>
-<!-- Dialog for delete -->
+<!-- Dialog for delete item -->
+<app-dialog [(visible)]="showDialogDeleteItem">
+  <div class="form">
+    <div class="form-header delete">
+      <h1>Are you sure you want to delete?</h1>
+    </div>
+    <div class="form-body delete-body">
+      <div class="delete-button-wrapper">
+        <button type="button" class="btn-create-chatbot cancel-button" (click)="showDialogDeleteItem = !showDialogDeleteItem;">No</button>
+        <button type="button" class="btn-create-chatbot delete-button" (click)="onDelete(idToDelete)">Yes</button>
+      </div>
+    </div>
+  </div>
+</app-dialog>
+<!-- Dialog for delete all-->
 <app-dialog [(visible)]="showDialogDelete">
   <div class="form">
     <div class="form-header delete">
-      <h1>Are you sure you want to Delete?</h1>
+      <h1>Are you sure you want to delete all?</h1>
     </div>
     <div class="form-body delete-body">
       <div class="delete-button-wrapper">
