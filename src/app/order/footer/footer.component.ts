@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { CookieService } from 'ngx-cookie';
 
 import { WindowCloseService, UserService } from '../../services';
 
@@ -11,12 +14,19 @@ export class FooterComponent {
   showDialog:boolean = false;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private _cookieService: CookieService,
     private close: WindowCloseService,
-    private user: UserService
+    private user: UserService,
   ) { }
 
   onSubmit() {
-    this.user.getUserDetails().subscribe(
+    if(this.activatedRoute.snapshot.queryParams["buyer_id"] !== undefined) {
+    this._cookieService.put('buyer_id', this.activatedRoute.snapshot.queryParams["buyer_id"]);
+    }
+
+    this.user.getUserDetails(this._cookieService.get('buyer_id')).subscribe(
       success => {
         this.close.sendToBot(success.data.buyer.fb_uid).subscribe(
           success => {

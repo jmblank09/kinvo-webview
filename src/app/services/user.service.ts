@@ -12,9 +12,9 @@ export class UserService {
 
   constructor(private http: Http, private _cookieService: CookieService) {}
 
-  getUserDetails() {
+  getUserDetails(id) {
     var graphql = `{
-                    buyer(brand_id: `+ this._cookieService.get('brand_id') +`, buyer_id:`+ this._cookieService.get('buyer_id')+`) {
+                    buyer(brand_id: `+ this._cookieService.get('brand_id') +`, buyer_id:`+ id +`) {
                   		first_name
                       last_name
                       fb_uid
