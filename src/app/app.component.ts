@@ -4,7 +4,9 @@ import {
   MenuService,
   LocationService,
   CartService,
-  BrandService
+  BrandService,
+  WindowCloseService,
+  UserService
 } from './services';
 
 @Component({
@@ -15,7 +17,9 @@ import {
     MenuService,
     LocationService,
     CartService,
-    BrandService
+    BrandService,
+    WindowCloseService,
+    UserService
   ]
 })
 export class AppComponent {

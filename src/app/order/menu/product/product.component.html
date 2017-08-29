@@ -3,7 +3,10 @@
   <div class="wrapper">
     <div class="image">
         <img *ngIf="product?.image != '' "src="product?.image"/>
-        <img *ngIf="product?.image == '' "src="../../../../assets/NoPicAvailable.png"/>
+        <!-- development -->
+        <!-- <img *ngIf="product.image == '' " src="../../../../assets/NoPicAvailable.png"/> -->
+        <!-- deployment -->
+        <img *ngIf="product.image == '' " src="assets/NoPicAvailable.png"/>
     </div>
     <div class="title">
       <h1>{{product?.name}}</h1>

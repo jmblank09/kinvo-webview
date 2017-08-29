@@ -8,7 +8,10 @@
       <div class="product" *ngFor="let cartItem of cartItems; let i = index">
         <div class="image">
           <img *ngIf="cartItem.product.image != '' "src="product.image"/>
-          <img *ngIf="cartItem.product.image == ''" src="../../../assets/NoPicAvailable.png"/>
+          <!-- development -->
+          <!-- <img *ngIf="product.image == '' " src="../../../../assets/NoPicAvailable.png"/> -->
+          <!-- deployment -->
+          <img *ngIf="product.image == '' " src="assets/NoPicAvailable.png"/>
         </div>
         <div class="description">
           <div class="product-name">

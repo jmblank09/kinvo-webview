@@ -14,12 +14,7 @@ export class LocationService {
 
   getLocation(lat: string, long: string) {
     this.url += lat + ',' + long;
-
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin', '*');
-
-    return this.http.get(this.url, {headers: headers})
+    return this.http.get(this.url)
     .map((data: Response) => data.json())
     .catch(this.handleError);
   }
