@@ -605,8 +605,10 @@ var FooterComponent = (function () {
         this.user.getUserDetails().subscribe(function (success) {
             _this.close.sendToBot(success.data.buyer.fb_uid).subscribe(function (success) {
                 console.log('success');
+            }, function (error) {
+                console.log('error');
                 window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Test';
-            }, function (error) { return console.log('error'); });
+            });
         }, function (error) { return console.log(error); });
     };
     return FooterComponent;
