@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { Subscription } from "rxjs/Rx";
 
-import { MenuService } from '../../../services';
+import { MenuService, CartService } from '../../../services';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private menu: MenuService,
+    private cart: CartService,
     private _cookieService: CookieService,
     public snackBar: MdSnackBar
   ) { }
@@ -108,8 +109,7 @@ export class ProductComponent implements OnInit {
       selected_options: this.productOptionValues
     };
 
-    console.log(data);
-    this.menu.addToCart(data).subscribe(
+    this.cart.addToCart(data).subscribe(
       success => {
         if(success.errors === undefined)
           this.openSnackBar('Product successfully added to cart', '');
@@ -122,7 +122,7 @@ export class ProductComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 3000
+      duration: 2000
     });
   }
 }

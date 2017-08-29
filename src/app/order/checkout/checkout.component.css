@@ -192,6 +192,100 @@
   }
 }
 
+.delete-button-wrapper button {
+  background: #fff;
+  border: 1px solid #e87c7c;
+  font-family: Roboto,sans-serif;
+  color: #e87c7c;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 10px;
+  letter-spacing: 0.6px;
+}
+
+.delete-button-wrapper button:hover {
+  background: #f3f2f2;
+}
+
+.delete-button-wrapper button.cancel-button {
+  color: #2ECC71;
+}
+
+.delete-button-wrapper button.delete-button {
+  color: #e87c7c;
+}
+
+.form {
+  width: 90%;
+  height: 100%;
+  padding: 16px;
+  vertical-align: middle;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.form-header h1 {
+  margin: 0px;
+  font-size: 20px;
+  font-weight: 300;
+  font-family: Roboto,sans-serif;
+}
+
+.form-header {
+  border-bottom: 1px solid #e7e4e4;
+  padding: 5px 0px 15px;
+}
+
+.form-body {
+  width: 100%;
+  color: #373C44;
+  height: 100%;
+  padding: 25px 0px;
+}
+
+.delete {
+  border: none;
+}
+
+.delete h1 {
+  text-align: center;
+  font-size: 16px;
+}
+
+.delete-body {
+  padding: 10px 0px;
+}
+
+.delete-button-wrapper {
+  text-align: center;
+}
+
+.delete-button-wrapper button {
+  padding: 10px 15px;
+}
+
+.delete-button-wrapper button.cancel-button {
+  border: 1px solid #e7e4e4;
+  margin-right: 2em;
+  color: #9196a1;
+}
+
+.delete-button-wrapper button.cancel-button:focus {
+  outline: none;
+}
+
+.delete-button-wrapper button.delete-button:focus{
+  outline-color: #e87c7c;
+}
+
+.delete-button-wrapper button.delete-button {
+  border: 1px solid #e87c7c;
+}
+
 /* loading */
 @-webkit-keyframes s_rotate1 {
   0% {

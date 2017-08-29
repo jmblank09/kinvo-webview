@@ -34,6 +34,7 @@ export class FooterComponent {
           },
           error => {
             console.log('error');
+            this.showDialog = !this.showDialog;
             window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Thank+You+For+Ordering';
           }
         );

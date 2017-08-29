@@ -59,31 +59,6 @@ export class MenuService {
     return this.sendRequest(graphql);
   }
 
-  addToCart(data: object) {
-    var ids = "";
-
-    for(var i = 0; i < data['selected_options'].length; i++) {
-      if(i != data['selected_options'].length - 1)
-        ids += '"'+data['selected_options'][i]['id']+'",';
-      else
-        ids += '"'+data['selected_options'][i]['id']+'"';
-    }
-
-    var mutation = ` mutation {
-      addItemToCart(cart_id: `+ data['cart_id'] +`,
-        product_id: `+ data['product_id'] +`,
-        product_option_value_ids: [`+ ids +`],
-        quantity: `+ data['quantity'] +`) {
-          cart {
-            id
-          }
-      }
-    }`;
-
-    console.log(mutation);
-    return this.sendRequest(mutation);
-  }
-
   sendRequest(graphql) {
     var formatted_data = {
       operationName: null,

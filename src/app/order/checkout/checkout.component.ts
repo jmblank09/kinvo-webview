@@ -12,6 +12,7 @@ import { CartService, BrandService } from '../../services';
 })
 export class CheckoutComponent implements OnInit {
   loadingCart: boolean = false;
+  showDialogDelete: boolean = false;
   private noFood: boolean = false;
   private totalPrice: number = 0;
   private brandId: string;
@@ -34,7 +35,10 @@ export class CheckoutComponent implements OnInit {
     this.buyerId = this.activatedRoute.snapshot.queryParams["buyer_id"];
 
     if((this.brandId !== undefined) && (this.buyerId !== undefined)) {
-      this.brand.getBrand(this.brandId).subscribe(
+      this._cookieService.put('brand_id', this.brandId);
+      this._cookieService.put('buyer_id', this.buyerId);
+
+      this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
         success => {
           this.title.setTitle(success.data.brand.name);
           this.cart.getCart(this.buyerId, this.brandId).subscribe(
@@ -50,29 +54,31 @@ export class CheckoutComponent implements OnInit {
       this.loadingCart = false;
 
     } else {
-      if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
-        this.brand.getBrand(this._cookieService.getObject('brand_id')).subscribe(
+      if(this._cookieService.getObject('cart_items') !== undefined) {
+        this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
           success => {
             this.title.setTitle(success.data.brand.name);
-            this.cart.getCart(this._cookieService.getObject('buyer_id'), this._cookieService.getObject('brand_id')).subscribe(
-              success => {
-                this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
-                this.addData(success.data.buyer.cart.cart_items);
-              },
-              error => console.log(error)
-            );
+            this.addData(this._cookieService.getObject('cart_items'));
           },
           error => console.log(error)
         );
       } else {
-        if(this._cookieService.getObject('cart_items') !== undefined) {
+        if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
           this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
             success => {
               this.title.setTitle(success.data.brand.name);
-              this.addData(this._cookieService.getObject('cart_items'));
+              this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
+                success => {
+                  this._cookieService.putObject('cart_items', success.data.buyer.cart.cart_items);
+                  this.addData(success.data.buyer.cart.cart_items);
+                },
+                error => console.log(error)
+              );
             },
             error => console.log(error)
           );
+        } else {
+          this.noFood = true;
         }
       }
 
@@ -98,8 +104,23 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  onDelete(state: string) {
+    if(state == 'all')
+      this.removeAll();
+    else
+      console.log('test');
+  }
+
   removeAll() {
-    console.log('remove all');
+    this.cart.removeAllItemsCart(this._cookieService.get('buyer_id')).subscribe(
+      success => {
+        this._cookieService.remove('cart_items');
+        this.cartItems = [];
+        this.noFood = true;
+        this.showDialogDelete = !this.showDialogDelete;
+      },
+      error => console.log(error)
+    );
   }
 
   deleteItem() {

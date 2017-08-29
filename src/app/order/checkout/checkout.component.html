@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="clear">
-        <button md-raised-button (click)="removeAll()">Remove all</button>
+        <button md-raised-button (click)="showDialogDelete = !showDialogDelete;">Remove all</button>
       </div>
       <div class="total-container">
         <div class="total-bill">
@@ -67,3 +67,17 @@
     <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"></path>
   </svg>
 </div>
+<!-- Dialog for delete -->
+<app-dialog [(visible)]="showDialogDelete">
+  <div class="form">
+    <div class="form-header delete">
+      <h1>Are you sure you want to Delete?</h1>
+    </div>
+    <div class="form-body delete-body">
+      <div class="delete-button-wrapper">
+        <button type="button" class="btn-create-chatbot cancel-button" (click)="showDialogDelete = !showDialogDelete;">No</button>
+        <button type="button" class="btn-create-chatbot delete-button" (click)="onDelete('all')">Yes</button>
+      </div>
+    </div>
+  </div>
+</app-dialog>
