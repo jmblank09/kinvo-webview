@@ -1462,6 +1462,7 @@ var LocationService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         headers.append('Access-Control-Allow-Origin', '*');
+        console.log(this.url);
         return this.http.get(this.url, { headers: headers })
             .map(function (data) { return data.json(); })
             .catch(this.handleError);
