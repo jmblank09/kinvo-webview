@@ -11,7 +11,7 @@ import { CartService, BrandService } from '../../services';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  loading: boolean = false;
+  loadingCart: boolean = false;
   private noFood: boolean = false;
   private totalPrice: number = 0;
   private brandId: string;
@@ -29,7 +29,7 @@ export class CheckoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
+    this.loadingCart = true;
     this.brandId = this.activatedRoute.snapshot.queryParams["brand_id"];
     this.buyerId = this.activatedRoute.snapshot.queryParams["buyer_id"];
 
@@ -42,14 +42,14 @@ export class CheckoutComponent implements OnInit {
           this.brand.getBrand(this.brandId).subscribe(
             success => {
               this.title.setTitle(success.data.brand.name);
-              this.loading = false;
+              this.loadingCart = false;
             },
             error => console.log(error)
           );
         },
         error => console.log(error)
       );
-      this.loading = false;
+      this.loadingCart = false;
     } else {
       if((this._cookieService.get('buyer_id') !== undefined) && (this._cookieService.get('brand_id') !== undefined)) {
         this.cart.getCart(this._cookieService.get('buyer_id'), this._cookieService.get('brand_id')).subscribe(
@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit {
             this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
               success => {
                 this.title.setTitle(success.data.brand.name);
-                this.loading = false;
+                this.loadingCart = false;
               },
               error => console.log(error)
             );
@@ -68,7 +68,7 @@ export class CheckoutComponent implements OnInit {
           error => console.log(error)
         );
       }
-      this.loading = false;
+      this.loadingCart = false;
     }
   }
 

@@ -14,6 +14,9 @@ import { CookieService } from 'ngx-cookie';
 export class ProductComponent implements OnInit {
   private productId: string;
   imageProduct: string = '';
+  name: string = '';
+  description: string = '';
+  price: number;
   quantityProduct: number = 1;
   additionalPriceProduct: number = 0;
   totalPriceProduct: number;
@@ -53,8 +56,11 @@ export class ProductComponent implements OnInit {
 
   setData(data) {
     this.selectedProduct = data;
-    this.setProductOptions(data.product_options);
     this.imageProduct = this.selectedProduct['image'];
+    this.name = this.selectedProduct['name'];
+    this.description = this.selectedProduct['description'];
+    this.price = this.selectedProduct['price'];
+    this.setProductOptions(data.product_options);
   }
 
   setProductOptions(options) {

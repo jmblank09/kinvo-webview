@@ -5,10 +5,10 @@
         <img [src]="imageProduct != '' ? imageProduct : 'assets/NoPicAvailable.png'"/>
     </div>
     <div class="title">
-      <h1>{{selectedProduct?.name}}</h1>
+      <h1>{{name}}</h1>
     </div>
     <div class="description">
-      <h3>{{selectedProduct?.description}}</h3>
+      <h3>{{description}}</h3>
     </div>
     <div class="quantity">
       <h3>Quantity</h3>
@@ -40,7 +40,7 @@
           <h2>Price</h2>
         </td>
         <td>
-          <h3><span>&#8369;</span> {{selectedProduct?.price | number : '1.2'}}</h3>
+          <h3><span>&#8369;</span> {{price | number : '1.2'}}</h3>
         </td>
       </tr>
       <tr class="additional-price">

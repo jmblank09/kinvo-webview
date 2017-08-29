@@ -11,7 +11,7 @@ import { MenuService } from '../../../services';
 })
 export class ProductListComponent implements OnInit {
   private categoryId: string;
-  private products:object[] = [];
+  products:object[] = [];
   private subscription: Subscription;
 
   constructor(
