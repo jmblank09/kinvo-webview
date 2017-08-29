@@ -1459,11 +1459,11 @@ var LocationService = (function () {
     }
     LocationService.prototype.getLocation = function (lat, long) {
         this.url += lat + ',' + long;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
+        // const headers = new Headers();
+        // headers.append('Content-Type', 'application/json');
         // headers.append('Access-Control-Allow-Origin', '*');
         console.log(this.url);
-        return this.http.get(this.url, { headers: headers })
+        return this.http.get(this.url)
             .map(function (data) { return data.json(); })
             .catch(this.handleError);
     };
