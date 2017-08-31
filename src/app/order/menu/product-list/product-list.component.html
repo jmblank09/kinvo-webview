@@ -7,7 +7,7 @@
     <a (click)="goToProduct(product.id)" *ngFor="let product of products">
       <div class="category" >
         <div class="image">
-            <img [src]="product?.image != '' ? product?.image : 'assets/NoPicAvailable.png'"/>
+            <img [src]="product?.image != '' ? 'https://881be530.ngrok.io' + product?.image : 'assets/NoPicAvailable.png'"/>
         </div>
         <div class="details">
           <h3>{{product.name}}</h3>

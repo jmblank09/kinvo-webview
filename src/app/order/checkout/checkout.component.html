@@ -7,7 +7,7 @@
     <div *ngIf="!noFood">
       <div class="product" *ngFor="let cartItem of cartItems; let i = index">
         <div class="image">
-          <img [src]="cartItem.product.image != '' ? cartItem.product.image : 'assets/NoPicAvailable.png'"/>
+          <img [src]="cartItem.product.image != '' ? 'https://881be530.ngrok.io' + cartItem.product.image : 'assets/NoPicAvailable.png'"/>
         </div>
         <div class="description">
           <div class="product-name">

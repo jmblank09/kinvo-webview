@@ -34,7 +34,7 @@ export class DeliveryComponent implements OnInit {
     this.title.setTitle('Delivery');
   }
 
-  onSubmit(){
+  onSubmit() {
     const data = {
       date: (this.temp.date.getUTCMonth() + 1)
         + '/' + (this.temp.date.getUTCDate() + 1)
@@ -53,14 +53,14 @@ export class DeliveryComponent implements OnInit {
         this.close.sendToBot(success.data.buyer.fb_uid, 'CHECKOUT').subscribe(
           success => {
             console.log('success');
+            console.log(success);
           },
           error => {
             console.log('error');
-            window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Thank+You+For+Ordering';
+            console.log(error);
           }
         );
       },
-      error => console.log(error)
     );
   }
 

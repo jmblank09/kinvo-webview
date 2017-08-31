@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   showDialogDelete: boolean = false;
   showDialogDeleteItem: boolean = false;
   private noFood: boolean = true;
-  private idToDelete: number;
+  idToDelete: string;
   private totalPrice: number = 0;
   private brandId: string;
   private buyerId: string;
