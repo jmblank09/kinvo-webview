@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   additionalPriceProduct: number = 0;
   totalPriceProduct: number;
   loading: boolean = false;
+  addCssClass : boolean = false;
   private selectedProductOption: object;
   selectedProduct: object = {
     name: '',
@@ -115,15 +116,21 @@ export class ProductComponent implements OnInit {
       selected_options: this.productOptionValues
     };
 
-    this.cart.addToCart(data).subscribe(
-      success => {
-        if(success.errors === undefined)
-          this.openSnackBar('Product successfully added to cart', '');
-        else
-          this.openSnackBar('There\'s something wrong', '');
-      },
-      error => console.log(error)
-    );
+    if(data.quantity <= 0) {
+      this.addCssClass = true;
+      this.openSnackBar('Quantity must be greater than 0', '');
+    } else {
+      this.cart.addToCart(data).subscribe(
+        success => {
+          if(success.errors === undefined)
+            this.openSnackBar('Product successfully added to cart', '');
+          else
+            this.openSnackBar('There\'s something wrong', '');
+        },
+        error => console.log(error)
+      );
+    }
+
   }
 
   openSnackBar(message: string, action: string) {

@@ -1,5 +1,5 @@
 export class AppSettings {
-  public static API_URL: string = 'https://881be530.ngrok.io/graphql';
+  public static API_URL: string = 'https://max-api-server.herokuapp.com/graphql';
   public static MAP_URL: string = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
-  public static BOT_URL: string = 'https://8b248b49.ngrok.io/webhooks/fb';
+  public static BOT_URL: string = 'https://kinvo-maxbot.herokuapp.com/webhooks/fb';
 }

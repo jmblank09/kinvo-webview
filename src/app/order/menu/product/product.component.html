@@ -14,7 +14,12 @@
       <h3>Quantity</h3>
       <div class="quantity-adjustment">
         <button md-raised-button (click)="subtractQuantity()">-</button>
-        <input type="number" [(ngModel)]="quantityProduct" min="1" name="quantityProduct"/>
+        <input
+        type="number"
+        min="1"
+        name="quantityProduct"
+        [(ngModel)]="quantityProduct"
+        [class.error-input]="addCssClass"/>
         <button md-raised-button (click)="addQuantity()">+</button>
       </div>
     </div>
