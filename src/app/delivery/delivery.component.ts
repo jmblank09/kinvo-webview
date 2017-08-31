@@ -44,7 +44,7 @@ export class DeliveryComponent implements OnInit {
 
     console.log(data);
 
-    if(this.activatedRoute.snapshot.queryParams["buyer_id"] !== undefined) 
+    if(this.activatedRoute.snapshot.queryParams["buyer_id"] !== undefined)
       this._cookieService.put('buyer_id', this.activatedRoute.snapshot.queryParams["buyer_id"]);
 
     this.user.getUserDetails(this._cookieService.get('buyer_id')).subscribe(
@@ -52,11 +52,10 @@ export class DeliveryComponent implements OnInit {
         this.close.sendToBot(success.data.buyer.fb_uid, 'CHECKOUT').subscribe(
           success => {
             console.log('success');
-            console.log(success);
           },
           error => {
             console.log('error');
-            console.log(error);
+            window.location.href = 'https://www.messenger.com/closeWindow/?image_url=https://s3-ap-southeast-1.amazonaws.com/kinvo-assets/images/illustration-thanks.png&display_text=Thank+You+For+Ordering';
           }
         );
       },
