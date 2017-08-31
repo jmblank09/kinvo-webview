@@ -44,7 +44,7 @@ export class DeliveryComponent implements OnInit {
 
     console.log(data);
 
-    jf(this.activatedRoute.snapshot.queryParams["buyer_id"] !== undefined) 
+    if(this.activatedRoute.snapshot.queryParams["buyer_id"] !== undefined) 
       this._cookieService.put('buyer_id', this.activatedRoute.snapshot.queryParams["buyer_id"]);
 
     this.user.getUserDetails(this._cookieService.get('buyer_id')).subscribe(
