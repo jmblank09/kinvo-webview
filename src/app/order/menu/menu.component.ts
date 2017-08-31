@@ -54,6 +54,7 @@ export class MenuComponent implements OnInit {
                 },
                 error => {
                   console.log(error);
+                  this.loading = false;
                 }
               );
             },
@@ -62,20 +63,19 @@ export class MenuComponent implements OnInit {
         },
         error => console.log(error)
       );
-
-      this.loading = false;
     } else {
       if(this._cookieService.getObject('categories') !== undefined) {
-        this.addData(this._cookieService.getObject('categories'));
-
         this.brand.getBrand(this._cookieService.get('brand_id')).subscribe(
           success => {
             this.title.setTitle(success.data.brand.name);
+            this.addData(this._cookieService.getObject('categories'));
           },
-          error => console.log(error)
+          error => {
+            console.log(error);
+            this.loading = false;
+          }
         );
       }
-      this.loading = false;
     }
   }
 
@@ -83,6 +83,7 @@ export class MenuComponent implements OnInit {
     for(var i = 0; i < data.length; i++) {
       this.categories.push(data[i]);
     }
+    this.loading = false;
   }
 
   goToProductList(id) {

@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   quantityProduct: number = 1;
   additionalPriceProduct: number = 0;
   totalPriceProduct: number;
+  loading: boolean = false;
   private selectedProductOption: object;
   selectedProduct: object = {
     name: '',
@@ -40,6 +41,7 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.subscription = this.activatedRoute.params.subscribe(
       (params: any) => {
         this.productId = params['prod_id'];
@@ -51,7 +53,10 @@ export class ProductComponent implements OnInit {
         this.setData(success.data.product);
         this.computeTotal();
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        this.loading = false;
+      }
     );
   }
 
@@ -68,6 +73,7 @@ export class ProductComponent implements OnInit {
     for(var i = 0; i < options.length; i++) {
       this.productOptions.push(options[i]);
     }
+    this.loading = false;
   }
 
   addQuantity() {

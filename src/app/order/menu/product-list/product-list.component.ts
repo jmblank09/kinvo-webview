@@ -11,6 +11,7 @@ import { MenuService } from '../../../services';
 })
 export class ProductListComponent implements OnInit {
   private categoryId: string;
+  loading: boolean = false;
   products:object[] = [];
   private subscription: Subscription;
 
@@ -21,6 +22,7 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.subscription = this.activatedRoute.params.subscribe(
       (params: any) => {
         this.categoryId = params['id'];
@@ -31,7 +33,10 @@ export class ProductListComponent implements OnInit {
       success => {
         this.addData(success.data.products);
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        this.loading = true;
+      }
     );
   }
 
@@ -39,6 +44,7 @@ export class ProductListComponent implements OnInit {
     for(var i = 0; i < data.length; i++) {
       this.products.push(data[i]);
     }
+    this.loading = false;
   }
 
   goToProduct(id) {
